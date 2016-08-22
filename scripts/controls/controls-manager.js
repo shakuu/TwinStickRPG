@@ -9,19 +9,31 @@
 
         Constructor.prototype.setKeyDown = function (keyCode) {
             if (validateKeyCode(keyCode)) {
-                controlDefinitionsByKeyCode[keyCode].state = true;
+                if (controlDefinitionsByKeyCode[keyCode]) {
+                    controlDefinitionsByKeyCode[keyCode].state = true;
+                } else {
+                    throw new Error('no ControlDefinition corresponding to this keyCode.');
+                }
             }
         };
 
         Constructor.prototype.setKeyUp = function (keyCode) {
             if (validateKeyCode(keyCode)) {
-                controlDefinitionsByKeyCode[ketCode].state = false;
+                if (controlDefinitionsByKeyCode[keyCode]) {
+                    controlDefinitionsByKeyCode[keyCode].state = false;
+                } else {
+                    throw new Error('no ControlDefinition corresponding to this keyCode.');
+                }
             }
         };
 
         Constructor.prototype.addDefinition = function (definition) {
             if (!definition || !definition.name || !definition.keyCode) {
-                throw new Error('invalid definition');
+                throw new Error('Invalid definition.');
+            }
+
+            if (!(+definition.keyCode || definition.keyCode === 0)) {
+                throw new Error('definition.keyCode must be a number.');
             }
 
             controlDefinitionsByControlName[definition.name] = definition;
