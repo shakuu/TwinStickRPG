@@ -1,0 +1,17 @@
+{
+  "name": "twin-stick-rpg",
+  "version": "0.0.1",
+  "description": "JavaScript game",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --recursive --reporter spec"
+  },
+  "keywords": [
+    "game",
+    "rpg"
+  ],
+  "author": "Hristo Todorov",
+  "license": "ISC"
+}
