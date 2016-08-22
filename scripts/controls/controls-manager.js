@@ -7,12 +7,16 @@
 
         }
 
-        Constructor.prototype.evaluateKeyDown = function (keyCode) {
-
+        Constructor.prototype.setKeyDown = function (keyCode) {
+            if (validateKeyCode(keyCode)) {
+                controlDefinitionsByKeyCode[keyCode].state = true;
+            }
         };
 
-        Constructor.prototype.evaluateKeyUp = function (keyCode) {
-
+        Constructor.prototype.setKeyUp = function (keyCode) {
+            if (validateKeyCode(keyCode)) {
+                controlDefinitionsByKeyCode[ketCode].state = false;
+            }
         };
 
         Constructor.prototype.addDefinition = function (definition) {
@@ -40,6 +44,14 @@
 
             return controlDefinitionsByControlName[controlName];
         };
+
+        function validateKeyCode(keyCode) {
+            if (!(+keyCode || keyCode === 0)) {
+                throw new Error('keyCode must be a number.');
+            }
+
+            return true;
+        }
 
         return Constructor;
     } ());
