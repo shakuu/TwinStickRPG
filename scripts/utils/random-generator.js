@@ -5,7 +5,7 @@
 
         function Constructor(min, max) {
             this.min = min;
-            this.max = max;
+            this.max = max;        
         }
 
         Object.defineProperty(Constructor.prototype, 'min', {
@@ -38,7 +38,7 @@
             if (+value || value === 0) {
                 return true;
             } else {
-                throw new Error();
+                throw new Error('Value must be a number.');
             }
         }
 
