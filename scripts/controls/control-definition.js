@@ -32,6 +32,10 @@
                     throw new Error('controlName parameter must be a string.');
                 }
 
+                if (!(3 <= controlName.length && controlName.length <= 16)) {
+                    throw new Error('controlName length must be between 3 and 16');
+                }
+
                 _controlName = controlName;
             }
         });
