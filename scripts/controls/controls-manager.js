@@ -1,7 +1,7 @@
 (function () {
     var ControlsManager = (function () {
         var controlDefinitionsByKeyCode = [],
-            controlDefinitiesByControlName = [];
+            controlDefinitionsByControlName = [];
 
         function Constructor() {
 
