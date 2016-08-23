@@ -342,8 +342,8 @@ describe('BaseWeapon', function () {
                     typeId: 0,
                     name: 'mod',
                     passiveEffect: 'true',
-                    apply: function () { },
-                    remove: function () { }
+                    applyEffect: function () { },
+                    removeEffect: function () { }
                 };
 
             act = () => {

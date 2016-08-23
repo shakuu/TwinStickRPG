@@ -11,6 +11,7 @@
             this.timeBetweenShotsInMs = options.timeBetweenShotsInMs;
             this.reloadTimeInMs = options.reloadTimeInMs;
             this.ammoCapacity = options.ammoCapacity;
+            this._activeEffectMods = [];
             this._mods = [];
         }
 
@@ -95,6 +96,11 @@
                 throw new Error('mod with this name already exists');
             }
 
+            if (mod.isPassiveEffect) {
+                mod.applyEffect(this);
+            } else {
+                this._activeEffectMods.push(mod);
+            }
             this._mods[mod.name] = mod;
         };
 
