@@ -41,6 +41,36 @@
             }
         });
 
+        Object.defineProperty(Constructor.prototype, 'reloadTimeInMs', {
+            get: function () {
+                return this._reloadTimeInMs;
+            },
+            set: function (reloadTimeInMs) {
+                validateValueIsNotSet(this._reloadTimeInMs);
+                if (validateIsNumber(reloadTimeInMs) &&
+                    validateNumberIsNotNegative(reloadTimeInMs) &&
+                    validateNumberIsIntegerValue(reloadTimeInMs)) {
+
+                    this._reloadTimeInMs = reloadTimeInMs;
+                }
+            }
+        });
+
+        Object.defineProperty(Constructor.prototype, 'ammoCapacity', {
+            get: function () {
+                return this._ammoCapacity;
+            },
+            set: function (ammoCapacity) {
+                validateValueIsNotSet(this._ammoCapacity);
+                if (validateIsNumber(ammoCapacity) &&
+                    validateNumberIsNotNegative(ammoCapacity) &&
+                    validateNumberIsIntegerValue(ammoCapacity)) {
+
+                    this._ammoCapacity = ammoCapacity;
+                }
+            }
+        });
+
         function validateValueIsNotSet(property) {
             if (property) {
                 throw new Error('Property value cannot be changed.');
