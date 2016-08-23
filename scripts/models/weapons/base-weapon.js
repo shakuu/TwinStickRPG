@@ -1,30 +1,48 @@
 (function () {
     var BaseWeapon = (function () {
-        var _damage,
-            _delayBetweenShotsInMs,
-            _reloadTime,
-            _ammoCapacity,
-            _ammo,
-            _mods = [];
+        // STATIC in this scope.
 
         function Constructor(options) {
+            if (!options) {
+                throw new Error('options parameter must be provided.');
+            }
 
+            this.damage = options.damage;
+            this.timeBetweenShotsInMs = options.timeBetweenShotsInMs;
+            this.reloadTimeInMs = options.reloadTimeInMs;
+            this.ammoCapacity = options.ammoCapacity;
+            this._mods = [];
         }
 
         Object.defineProperty(Constructor.prototype, 'damage', {
             get: function () {
-                return _damage;
+                return this._damage;
             },
             set: function (damage) {
-                validateValueIsNotSet(_damage);
+                validateValueIsNotSet(this._damage);
                 if (validateIsNumber(damage) && validateNumberIsNotNegative(damage)) {
-                    _damage = damage;
+                    this._damage = damage;
+                }
+            }
+        });
+
+        Object.defineProperty(Constructor.prototype, 'timeBetweenShotsInMs', {
+            get: function () {
+                return this._timeBetweenShotsInMs;
+            },
+            set: function (timeBetweenShotsInMs) {
+                validateValueIsNotSet(this._timeBetweenShotsInMs);
+                if (validateIsNumber(timeBetweenShotsInMs) &&
+                    validateNumberIsNotNegative(timeBetweenShotsInMs) &&
+                    validateNumberIsIntegerValue(timeBetweenShotsInMs)) {
+
+                    this._timeBetweenShotsInMs = timeBetweenShotsInMs;
                 }
             }
         });
 
         function validateValueIsNotSet(property) {
-            if (typeof property !== 'undefined') {
+            if (property) {
                 throw new Error('Property value cannot be changed.');
             }
         }
@@ -42,6 +60,14 @@
                 return true;
             } else {
                 throw new Error('Value must be greated than or equal to zero.');
+            }
+        }
+
+        function validateNumberIsIntegerValue(value) {
+            if ((value | 0) === value) {
+                return true;
+            } else {
+                throw new Error('Value must be an integer.');
             }
         }
 
