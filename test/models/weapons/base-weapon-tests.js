@@ -149,7 +149,7 @@ describe('BaseWeapon', function () {
                     damage: 50,
                     timeBetweenShotsInMs: 500,
                     reloadTimeInMs: 10000,
-                    ammoCapacity:  'not a number'
+                    ammoCapacity: 'not a number'
                 };
 
             act = () => {
@@ -205,6 +205,49 @@ describe('BaseWeapon', function () {
             };
 
             expect(act).to.not.throw();
+        });
+    });
+
+    describe('addMod', function () {
+
+        it('Should throw when mod parameter is not provided', function () {
+            var act,
+                weapon,
+                options = {
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                };
+
+            act = () => {
+                weapon = new BaseWeapon(options);
+                weapon.addMod();
+            };
+
+            expect(act).to.not.throw(/mod/);
+        });
+
+        it('Should throw when mod.name parameter is not a string', function () {
+            var act,
+                weapon,
+                options = {
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                },
+                mod = {
+                    name: null,
+                    effect: function () { }
+                };
+
+            act = () => {
+                weapon = new BaseWeapon(options);
+                weapon.addMod();
+            };
+
+            expect(act).to.not.throw(/mod/);
         });
     });
 });

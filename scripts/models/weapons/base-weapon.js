@@ -71,6 +71,20 @@
             }
         });
 
+        Object.defineProperty(Constructor.prototype, 'addMod', {
+            value: {
+                function(mod) {
+                    if (!mod) {
+                        throw new Error('mod parameter must be provided.');
+                    }
+
+                    if (!mod.name || typeof mod.name !== 'string') {
+                        throw new Error('mod.name must be provided.');
+                    }
+                }
+            }
+        });
+
         function validateValueIsNotSet(property) {
             if (property) {
                 throw new Error('Property value cannot be changed.');
