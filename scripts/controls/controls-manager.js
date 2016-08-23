@@ -22,7 +22,7 @@
             return controlDefinition;
         };
 
-        Constructor.prototype.setKeyUp = function (keyCode) {
+         Constructor.prototype.setKeyUp = function (keyCode) {
             var controlDefinition;
 
             if (validateKeyCode(keyCode)) {
@@ -33,7 +33,7 @@
                     throw new Error('no ControlDefinition corresponding to this keyCode.');
                 }
             }
-            
+
             return controlDefinition;
         };
 
@@ -58,7 +58,7 @@
             if (!(+definition.keyCode || definition.keyCode === 0)) {
                 throw new Error('definition.keyCode must be a number.');
             }
-            
+
             controlDefinitionsByControlName[definition.name] = null;
             controlDefinitionsByKeyCode[definition.keyCode] = null;
         };
