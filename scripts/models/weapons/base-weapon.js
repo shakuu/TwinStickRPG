@@ -71,19 +71,38 @@
             }
         });
 
-        Object.defineProperty(Constructor.prototype, 'addMod', {
-            value: {
-                function(mod) {
-                    if (!mod) {
-                        throw new Error('mod parameter must be provided.');
-                    }
-
-                    if (!mod.name || typeof mod.name !== 'string') {
-                        throw new Error('mod.name must be provided.');
-                    }
-                }
+        Constructor.prototype.addMod = function (mod) {
+            if (!mod) {
+                throw new Error('mod parameter must be provided.');
             }
-        });
+            if (!(+mod.typeId || mod.typeId === 0)) {
+                throw new Error('mod.typeId must be a valid integer number.');
+            } else {
+                validateNumberIsIntegerValue(mod.typeId);
+            }
+
+            if (!mod.name || typeof mod.name !== 'string') {
+                throw new Error('mod.name must be a valid string.');
+            }
+
+            if (!mod.isPassiveEffect || typeof mod.isPassiveEffect !== 'boolean') {
+                throw new Error('mod.isPassiveEffect must be a valid boolean.');
+            }
+
+            if (this._mods.some(function (el) {
+                return el.typeId === mod.typeId;
+            })) {
+                throw new Error('mod with this name already exists');
+            }
+
+            this._mods[mod.name] = mod;
+        };
+
+        Constructor.prototype.shoot = function () {
+            var damageToDo;
+
+            return damageToDo;
+        };
 
         function validateValueIsNotSet(property) {
             if (property) {
@@ -108,7 +127,7 @@
         }
 
         function validateNumberIsIntegerValue(value) {
-            if ((value | 0) === value) {
+            if ((value | 0) === +value) {
                 return true;
             } else {
                 throw new Error('Value must be an integer.');

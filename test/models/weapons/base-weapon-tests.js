@@ -225,7 +225,57 @@ describe('BaseWeapon', function () {
                 weapon.addMod();
             };
 
-            expect(act).to.not.throw(/mod/);
+            expect(act).to.throw(/mod/);
+        });
+
+        it('Should throw when mod.typeId parameter is not a number', function () {
+            var act,
+                weapon,
+                options = {
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                },
+                mod = {
+                    typeId: 'zero',
+                    name: 'name',
+                    isPassiveEffect: true,
+                    apply: function () { },
+                    remove: function () { }
+                };
+
+            act = () => {
+                weapon = new BaseWeapon(options);
+                weapon.addMod(mod);
+            };
+
+            expect(act).to.throw(/typeId/);
+        });
+
+        it('Should throw when mod.typeId parameter is not an integer.', function () {
+            var act,
+                weapon,
+                options = {
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                },
+                mod = {
+                    typeId: '13.37',
+                    name: 'name',
+                    isPassiveEffect: true,
+                    apply: function () { },
+                    remove: function () { }
+                };
+
+            act = () => {
+                weapon = new BaseWeapon(options);
+                weapon.addMod(mod);
+            };
+
+            expect(act).to.throw(/must be an integer/);
         });
 
         it('Should throw when mod.name parameter is not a string', function () {
@@ -238,16 +288,70 @@ describe('BaseWeapon', function () {
                     ammoCapacity: 10
                 },
                 mod = {
+                    typeId: 0,
                     name: null,
-                    effect: function () { }
+                    isPassiveEffect: true,
+                    apply: function () { },
+                    remove: function () { }
                 };
 
             act = () => {
                 weapon = new BaseWeapon(options);
-                weapon.addMod();
+                weapon.addMod(mod);
             };
 
-            expect(act).to.not.throw(/mod/);
+            expect(act).to.throw(/mod.name/);
+        });
+
+        it('Should throw when mod.isPassiveEffect parameter is not a boolean', function () {
+            var act,
+                weapon,
+                options = {
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                },
+                mod = {
+                    typeId: 0,
+                    name: 'mod',
+                    passiveEffect: 'true',
+                    apply: function () { },
+                    remove: function () { }
+                };
+
+            act = () => {
+                weapon = new BaseWeapon(options);
+                weapon.addMod(mod);
+            };
+
+            expect(act).to.throw(/mod.isPassiveEffect/);
+        });
+
+        it('Should throw when mod with the same typeId is already in the list.', function () {
+            var act,
+                weapon,
+                options = {
+                    typeId: 0,
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                },
+                mod = {
+                    typeId: 0,
+                    name: 'mod',
+                    passiveEffect: 'true',
+                    apply: function () { },
+                    remove: function () { }
+                };
+
+            act = () => {
+                weapon = new BaseWeapon(options);
+                weapon.addMod(mod);
+            };
+
+            expect(act).to.throw(/mod.isPassiveEffect/);
         });
     });
 });
