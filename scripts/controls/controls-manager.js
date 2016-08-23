@@ -8,32 +8,14 @@
         }
 
         Constructor.prototype.setKeyDown = function (keyCode) {
-            var controlDefinition;
-
-            if (validateKeyCode(keyCode)) {
-                if (controlDefinitionsByKeyCode[keyCode]) {
-                    controlDefinitionsByKeyCode[keyCode].state = true;
-                    controlDefinition = controlDefinitionsByKeyCode[keyCode];
-                } else {
-                    throw new Error('no ControlDefinition corresponding to this keyCode.');
-                }
-            }
-
+            var controlDefinition = getControlDefinitionByKeyCode(keyCode);
+            controlDefinition.state = true;
             return controlDefinition;
         };
 
-         Constructor.prototype.setKeyUp = function (keyCode) {
-            var controlDefinition;
-
-            if (validateKeyCode(keyCode)) {
-                if (controlDefinitionsByKeyCode[keyCode]) {
-                    controlDefinitionsByKeyCode[keyCode].state = false;
-                    controlDefinition = controlDefinitionsByKeyCode[keyCode];
-                } else {
-                    throw new Error('no ControlDefinition corresponding to this keyCode.');
-                }
-            }
-
+        Constructor.prototype.setKeyUp = function (keyCode) {
+            var controlDefinition = getControlDefinitionByKeyCode(keyCode);
+            controlDefinition.state = false;
             return controlDefinition;
         };
 
@@ -74,6 +56,20 @@
 
             return controlDefinitionsByControlName[controlName];
         };
+
+        function getControlDefinitionByKeyCode(keyCode) {
+            var controlDefinition;
+
+            if (validateKeyCode(keyCode)) {
+                if (controlDefinitionsByKeyCode[keyCode]) {
+                    controlDefinition = controlDefinitionsByKeyCode[keyCode];
+                } else {
+                    throw new Error('no ControlDefinition corresponding to this keyCode.');
+                }
+            }
+
+            return controlDefinition;
+        }
 
         function validateKeyCode(keyCode) {
             if (!(+keyCode || keyCode === 0)) {
