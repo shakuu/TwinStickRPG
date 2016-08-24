@@ -1,4 +1,6 @@
 (() => {
+    let WeaponOptions = require('../../utils/options-containers/weapon-options');
+
     class BaseWeapon {
         constructor(options) {
             if (!options) {

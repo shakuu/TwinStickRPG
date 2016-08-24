@@ -1,11 +1,12 @@
-var BaseWeapon = require('../../../src-server/models/weapons/base-weapon');
-var expect = require('chai').expect;
+let BaseWeapon = require('../../../src-server/models/weapons/base-weapon');
+let WeaponOptions = require('../../../src-server/utils/options-containers/weapon-options');
+let expect = require('chai').expect;
 
 describe('BaseWeapon', function () {
 
     describe('constructor', function () {
 
-        it('Should throw if options parameter is not provided', function () {
+        it('Should throw if options parameter is not provided.', function () {
             var act;
 
             act = () => {
@@ -15,7 +16,7 @@ describe('BaseWeapon', function () {
             expect(act).to.throw(/options/);
         });
 
-        it('Should throw if options.damage is not a number', function () {
+        it('Should throw if options.damage is not a number.', function () {
             var act,
                 options = {
                     damage: 'not a number',

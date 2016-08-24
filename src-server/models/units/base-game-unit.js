@@ -1,13 +1,14 @@
-((parent) => {
+(() => {
+    var BaseGameObject = require('../base-game-object');
     var Weapon = require('../weapons/base-weapon');
 
-    class BaseGameUnit extends parent {
-        constructor(id, type, healthPoints) {
+    class BaseGameUnit extends BaseGameObject {
+        constructor(id, type, healthPoints, weapon) {
             super(id, type);
 
             healthPoints = healthPoints || 100;
             this.healthPoints = healthPoints;
-
+            this.currentWeapon = weapon;
             this._positionX = 0;
             this._positionY = 0;
             this.experience = 0;
@@ -142,4 +143,4 @@
     }
 
     module.exports = BaseGameUnit;
-})(require('../base-game-object'));
+})();

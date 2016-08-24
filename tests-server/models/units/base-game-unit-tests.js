@@ -1,13 +1,17 @@
-var BaseGameUnit = require('../../../src-server/models/units/base-game-unit');
-var Weapon = require('../../../src-server/models/weapons/base-weapon');
-var expect = require('chai').expect;
+let BaseGameUnit = require('../../../src-server/models/units/base-game-unit');
+let Weapon = require('../../../src-server/models/weapons/base-weapon');
+let WeaponOptions = require('../../../src-server/utils/options-containers/weapon-options');
+let expect = require('chai').expect;
 
 describe('BaseGameUnit', () => {
     describe('constructor', () => {
         it('Should set positionX and positionY values to 0.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 actualPosition = unit.position;
 
             expect(actualPosition.x).to.equal(0);
@@ -17,7 +21,10 @@ describe('BaseGameUnit', () => {
         it('Should set initial id value correctly.', () => {
             var providedId = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(providedId, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(providedId, type, healthPoints, weapon),
                 actualId = unit.id;
 
             expect(actualId).to.equal(providedId);
@@ -26,7 +33,10 @@ describe('BaseGameUnit', () => {
         it('Should set initial type value correctly.', () => {
             var id = 0,
                 providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, providedType, healthPoints, weapon),
                 actualType = unit.type;
 
             expect(actualType).to.equal(providedType);
@@ -34,33 +44,44 @@ describe('BaseGameUnit', () => {
 
         it('Should set initial experience value correctly.', () => {
             var id = 0,
-                providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType);
+                type = 'base unit',
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon);
 
             expect(unit.experience).to.equal(0);
         });
 
         it('Should set initial level value correctly.', () => {
             var id = 0,
-                providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType);
+                type = 'base unit',
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon);
 
             expect(unit.level).to.equal(1);
         });
 
         it('Should set initial healthPoints value correctly.', () => {
             var id = 0,
-                providedType = 'base unit',
-                providedHealthPoints = 1000;
-            unit = new BaseGameUnit(id, providedType, providedHealthPoints);
+                type = 'base unit',
+                providedHealthPoints = 1000,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, providedHealthPoints, weapon);
 
             expect(unit.healthPoints).to.equal(providedHealthPoints);
         });
 
         it('Should set initial isAlive value correctly.', () => {
             var id = 0,
-                providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType);
+                type = 'base unit',
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon);
 
             expect(unit.isAlive).to.equal(true);
         });
@@ -70,7 +91,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position parameter is not provided.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 act;
 
             act = () => {
@@ -83,7 +107,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.x is not provided.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: null,
                     y: 5
@@ -100,7 +127,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.x is not a number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: 'number',
                     y: 5
@@ -117,7 +147,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.x is a negative number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: -5,
                     y: 5
@@ -134,7 +167,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.x is not an integer value.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: 5.12,
                     y: 5
@@ -148,11 +184,13 @@ describe('BaseGameUnit', () => {
             expect(act).to.throw(/integer/);
         });
 
-        //
         it('Should throw when position.y is not provided.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: 5,
                     y: null
@@ -169,7 +207,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.y is not a number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: 5,
                     y: 'number'
@@ -186,7 +227,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.y is a negative number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: +5,
                     y: -5
@@ -203,7 +247,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when position.y is not an integer value.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: 5,
                     y: 5.45
@@ -220,7 +267,10 @@ describe('BaseGameUnit', () => {
         it('Should not throw when position parameter is valid.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 position = {
                     x: 1001,
                     y: 50
@@ -239,7 +289,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when level is not a number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 level = 'zero',
                 act;
 
@@ -253,7 +306,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when level is a negative number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 level = -1234,
                 act;
 
@@ -267,7 +323,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when experience is not an integer value.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 level = 12.34,
                 act;
 
@@ -283,7 +342,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when experience is not a number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 experience = 'zero',
                 act;
 
@@ -297,7 +359,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when experience is a negative number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 experience = -1234,
                 act;
 
@@ -311,7 +376,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when experience is not an integer value.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, weapon),
                 experience = 12.34,
                 act;
 
@@ -327,7 +395,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when healthPoints is not a number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                baseHealthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, baseHealthPoints, weapon),
                 healthPoints = 'zero',
                 act;
 
@@ -341,7 +412,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when healthPoints is not an integer value.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                baseHealthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, baseHealthPoints, weapon),
                 healthPoints = 12.34,
                 act;
 
@@ -355,7 +429,10 @@ describe('BaseGameUnit', () => {
         it('Should throw when healthPoints is a negative number.', () => {
             var id = 0,
                 type = 'base unit',
-                unit = new BaseGameUnit(id, type),
+                baseHealthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                weapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, baseHealthPoints, weapon),
                 healthPoints = -1234,
                 act;
 
@@ -370,8 +447,11 @@ describe('BaseGameUnit', () => {
     describe('currentWeapon', () => {
         it('Should throw if weapon parameter is not provided.', () => {
             var id = 0,
-                providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType),
+                type = 'base unit',
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                baseWeapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, baseWeapon),
                 weapon = null,
                 act;
 
@@ -384,8 +464,11 @@ describe('BaseGameUnit', () => {
 
         it('Should throw if weapon parameter is not instanceof Weapon.', () => {
             var id = 0,
-                providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType),
+                type = 'base unit',
+                healthPoints = 100,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                baseWeapon = new Weapon(weaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, baseWeapon),
                 weapon = {},
                 act;
 
@@ -398,8 +481,11 @@ describe('BaseGameUnit', () => {
 
         it('Should not throw if weapon parameter valid.', () => {
             var id = 0,
-                providedType = 'base unit',
-                unit = new BaseGameUnit(id, providedType),
+                type = 'base unit',
+                healthPoints = 100,
+                baseWeaponOptions = new WeaponOptions(50, 100, 1000, 100),
+                baseWeapon = new Weapon(baseWeaponOptions),
+                unit = new BaseGameUnit(id, type, healthPoints, baseWeapon),
                 weaponOptions = {
                     damage: 30,
                     timeBetweenShotsInMs: 500,
