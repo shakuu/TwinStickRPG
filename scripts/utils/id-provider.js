@@ -1,22 +1,20 @@
-(function () {
-    var IdProvider = (function () {
-        var _currentValue;
-
-        function Constructor() {
-            _currentValue = -1;
+var IdProvider = (() => {
+    class IdProvider {
+        constructor() {
+            this._currentValue = -1;
         }
 
-        Constructor.prototype.getNext = function () {
-            _currentValue += 1;
-            return _currentValue;
-        };
+        getNext() {
+            this._currentValue += 1;
+            return this._currentValue;
+        }
 
-        Constructor.prototype.reset = function () {
-            _currentValue = -1;
-        };
+        reset() {
+            this._currentValue = -1;
+        }
+    }
 
-        return Constructor;
-    } ());
+    return IdProvider;
+})();
 
-    module.exports = IdProvider;
-} ());
+export {IdProvider};

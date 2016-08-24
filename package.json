@@ -2,11 +2,15 @@
   "name": "twin-stick-rpg",
   "version": "0.0.1",
   "description": "JavaScript game",
-  "main": "app.js",
+  "main": "./scripts/app.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.13.2"
+  },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --recursive --reporter spec"
+    "test": "./node_modules/.bin/mocha --recursive --reporter spec --compilers js:babel-core/register",
+    "build": "babel scripts -d lib"
   },
   "keywords": [
     "game",
