@@ -1,45 +1,40 @@
-(function () {
-    var BaseGameObject = (function () {
-        var _id,
-            _type;
-
-        function Constructor(id, type) {
+var BaseGameObject = (() => {
+    class BaseGameObject {
+        constructor(id, type) {
             this.id = id;
             this.type = type;
         }
 
-        Object.defineProperty(Constructor.prototype, 'id', {
-            get: function () {
-                return _id;
-            },
-            set: function (id) {
-                if (!(+id || id === 0)) {
-                    throw new Error('id parameter must be a number');
-                }
+        get id() {
+            return this._id;
+        }
 
-                _id = id;
+        set id(id) {
+            if (!(+id || id === 0)) {
+                throw new Error('id parameter must be a number');
             }
-        });
 
-        Object.defineProperty(Constructor.prototype, 'type', {
-            get: function () {
-                return _type;
-            },
-            set: function (type) {
-                if (typeof _type !== 'undefined') {
-                    throw new Error('type property should not be changed');
-                }
+            this._id = id;
+        }
 
-                if (typeof type !== 'string') {
-                    throw new Error('type parameter must be a string');
-                }
+        get type() {
+            return this._type;
+        }
 
-                _type = type;
+        set type(type) {
+            if (typeof this._type !== 'undefined') {
+                throw new Error('type property should not be changed');
             }
-        });
 
-        return Constructor;
-    } ());
+            if (typeof type !== 'string') {
+                throw new Error('type parameter must be a string');
+            }
 
-    module.exports = BaseGameObject;
-} ());
+            this._type = type;
+        }
+    }
+
+    return BaseGameObject;
+})();
+
+export {BaseGameObject};
