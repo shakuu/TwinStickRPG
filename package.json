@@ -10,8 +10,12 @@
   },
   "scripts": {
     "servertests": "./node_modules/.bin/mocha tests-server --recursive --reporter spec",
-    "test-client": "./node_modules/.bin/mocha client-tests --recursive --reporter spec --compilers js:babel-core/register",    
+    "test-client": "./node_modules/.bin/mocha client-tests --recursive --reporter spec --compilers js:babel-core/register",
     "build": "babel src-browser -d src-browser-compiled"
+  },
+  "engines": {
+    "node": "6.2.1",
+    "npm": "3.9.3"
   },
   "keywords": [
     "game",

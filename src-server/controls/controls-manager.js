@@ -1,85 +1,80 @@
-(function () {
-    var ControlsManager = (function () {
-        var controlDefinitionsByKeyCode = [],
-            controlDefinitionsByControlName = [];
-            
-        function Constructor() {
+(() => {
+    class ControlsManger {
+        constructor() {
+            this.controlDefinitionsByKeyCode = [];
+            this.controlDefinitionsByControlName = [];
         }
 
-        Constructor.prototype.setKeyDown = function (keyCode) {
-            var controlDefinition = getControlDefinitionByKeyCode(keyCode);
+        setKeyDown(keyCode) {
+            var controlDefinition =
+                getControlDefinitionByKeyCode(keyCode, this.controlDefinitionsByKeyCode);
             controlDefinition.state = true;
             return controlDefinition;
-        };
+        }
 
-        Constructor.prototype.setKeyUp = function (keyCode) {
-            var controlDefinition = getControlDefinitionByKeyCode(keyCode);
+        setKeyUp(keyCode) {
+            var controlDefinition =
+                getControlDefinitionByKeyCode(keyCode, this.controlDefinitionsByKeyCode);
             controlDefinition.state = false;
             return controlDefinition;
-        };
+        }
 
-        Constructor.prototype.addDefinition = function (definition) {
-            if (!definition || !definition.name || !definition.keyCode) {
-                throw new Error('Invalid definition.');
-            }
+        addDefinition(definition) {
+            validateDefinitionInputParameter(definition);
 
-            if (!(+definition.keyCode || definition.keyCode === 0)) {
-                throw new Error('definition.keyCode must be a number.');
-            }
+            this.controlDefinitionsByControlName[definition.name] = definition;
+            this.controlDefinitionsByKeyCode[definition.keyCode] = definition;
+        }
 
-            controlDefinitionsByControlName[definition.name] = definition;
-            controlDefinitionsByKeyCode[definition.keyCode] = definition;
-        };
+        removeDefinition(definition) {
+            validateDefinitionInputParameter(definition);
 
-        Constructor.prototype.removeDefinition = function (definition) {
-            if (!definition || !definition.name || !definition.keyCode) {
-                throw new Error('Invalid definition.');
-            }
+            this.controlDefinitionsByControlName[definition.name] = null;
+            this.controlDefinitionsByKeyCode[definition.keyCode] = null;
+        }
 
-            if (!(+definition.keyCode || definition.keyCode === 0)) {
-                throw new Error('definition.keyCode must be a number.');
-            }
-
-            controlDefinitionsByControlName[definition.name] = null;
-            controlDefinitionsByKeyCode[definition.keyCode] = null;
-        };
-
-        Constructor.prototype.getControlState = function (controlName) {
+        getControlState(controlName) {
             if (typeof controlName !== 'string') {
                 throw new Error('controlName parameter must be a string.');
             }
 
-            if (!controlDefinitionsByControlName[controlName]) {
+            if (!this.controlDefinitionsByControlName[controlName]) {
                 throw new Error(controlName + ' is not defined.');
             }
 
-            return controlDefinitionsByControlName[controlName];
-        };
+            return this.controlDefinitionsByControlName[controlName];
+        }
+    }
 
-        function getControlDefinitionByKeyCode(keyCode) {
-            var controlDefinition;
+    function getControlDefinitionByKeyCode(keyCode, controlDefinitionsByKeyCode) {
+        var controlDefinition;
 
-            if (validateKeyCode(keyCode)) {
-                if (controlDefinitionsByKeyCode[keyCode]) {
-                    controlDefinition = controlDefinitionsByKeyCode[keyCode];
-                } else {
-                    throw new Error('no ControlDefinition corresponding to this keyCode.');
-                }
+        if (validateKeyCode(keyCode)) {
+            if (controlDefinitionsByKeyCode[keyCode]) {
+                controlDefinition = controlDefinitionsByKeyCode[keyCode];
+            } else {
+                throw new Error('no ControlDefinition corresponding to this keyCode.');
             }
-
-            return controlDefinition;
         }
 
-        function validateKeyCode(keyCode) {
-            if (!(+keyCode || keyCode === 0)) {
-                throw new Error('keyCode must be a number.');
-            }
+        return controlDefinition;
+    }
 
-            return true;
+    function validateDefinitionInputParameter(definition) {
+        if (!definition || !definition.name || !definition.keyCode) {
+            throw new Error('Invalid definition.');
         }
 
-        return Constructor;
-    } ());
+        validateKeyCode(definition.keyCode);
+    }
 
-    module.exports = ControlsManager;
-} ());
+    function validateKeyCode(keyCode) {
+        if (!(+keyCode || keyCode === 0)) {
+            throw new Error('keyCode must be a number.');
+        }
+
+        return true;
+    }
+
+    module.exports = ControlsManger;
+})();

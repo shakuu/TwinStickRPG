@@ -62,7 +62,7 @@ describe('ControlManager', function () {
                 controlsManager.addDefinition(definition);
             };
 
-            expect(act).to.throw(/definition.keyCode/);
+            expect(act).to.throw(/keyCode/);
         });
 
         it('Should not throw when definition parameter is correct', function () {
@@ -142,7 +142,7 @@ describe('ControlManager', function () {
                 controlsManager.removeDefinition(definition);
             };
 
-            expect(act).to.throw(/definition.keyCode/);
+            expect(act).to.throw(/keyCode/);
         });
 
         it('Should not throw when definition parameter is correct', function () {
