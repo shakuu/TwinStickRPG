@@ -14,7 +14,5 @@ var IdProvider = (() => {
         }
     }
 
-    return IdProvider;
+    module.exports = IdProvider;
 })();
-
-export {IdProvider};

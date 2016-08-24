@@ -1,4 +1,4 @@
-var BaseWeapon = require('../../../scripts/models/weapons/base-weapon');
+var BaseWeapon = require('../../../src-server/models/weapons/base-weapon');
 var expect = require('chai').expect;
 
 describe('BaseWeapon', function () {

@@ -1,4 +1,4 @@
-import {Random} from '../../lib/utils/random-generator';
+var Random = require('../../src-server/utils/random-generator');
 var expect = require('chai').expect;
 
 describe('Random', function () {

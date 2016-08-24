@@ -34,7 +34,5 @@ var BaseGameObject = (() => {
         }
     }
 
-    return BaseGameObject;
+    module.exports = BaseGameObject;
 })();
-
-export {BaseGameObject};

@@ -1,4 +1,4 @@
-var ControlsManager = require('../../scripts/controls/controls-manager'),
+var ControlsManager = require('../../src-server/controls/controls-manager'),
     expect = require('chai').expect;
 
 describe('ControlManager', function () {

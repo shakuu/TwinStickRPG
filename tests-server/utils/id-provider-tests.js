@@ -1,4 +1,4 @@
-import {IdProvider} from '../../lib/utils/id-provider';
+var IdProvider = require('../../src-server/utils/id-provider');
 var expect = require('chai').expect;
 
 describe('IdProvider', function () {

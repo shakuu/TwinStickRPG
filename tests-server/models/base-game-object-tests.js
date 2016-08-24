@@ -1,4 +1,4 @@
-import{BaseGameObject}from '../../lib/models/base-game-object';
+var BaseGameObject = require('../../src-server/models/base-game-object');
 var expect = require('chai').expect;
 
 describe('BaseGameObject', function () {

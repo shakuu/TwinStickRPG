@@ -38,7 +38,5 @@ var Random = (() => {
         }
     }
 
-    return Random;
+    module.exports = Random;
 })();
-
-export {Random};
