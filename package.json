@@ -10,7 +10,7 @@
   },
   "scripts": {
     "servertests": "./node_modules/.bin/mocha tests-server --recursive --reporter spec",
-    "test-client": "./node_modules/.bin/mocha client-tests --recursive --reporter spec --compilers js:babel-core/register",
+    "clienttests": "./node_modules/.bin/mocha tests-client --recursive --reporter spec --compilers js:babel-core/register",
     "build": "babel src-browser -d src-browser-compiled"
   },
   "engines": {
