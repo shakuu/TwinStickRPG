@@ -1,8 +1,6 @@
-(function () {
-    var BaseWeapon = (function () {
-        // STATIC in this scope.
-
-        function Constructor(options) {
+(() => {
+    class BaseWeapon {
+        constructor(options) {
             if (!options) {
                 throw new Error('options parameter must be provided.');
             }
@@ -15,64 +13,60 @@
             this._mods = [];
         }
 
-        Object.defineProperty(Constructor.prototype, 'damage', {
-            get: function () {
-                return this._damage;
-            },
-            set: function (damage) {
-                validateValueIsNotSet(this._damage);
-                if (validateIsNumber(damage) && validateNumberIsNotNegative(damage)) {
-                    this._damage = damage;
-                }
+        get damage() {
+            return this._damage;
+        }
+
+        set damage(damage) {
+            validateValueIsNotSet(this._damage);
+            if (validateIsNumber(damage) && validateNumberIsNotNegative(damage)) {
+                this._damage = damage;
             }
-        });
+        }
 
-        Object.defineProperty(Constructor.prototype, 'timeBetweenShotsInMs', {
-            get: function () {
-                return this._timeBetweenShotsInMs;
-            },
-            set: function (timeBetweenShotsInMs) {
-                validateValueIsNotSet(this._timeBetweenShotsInMs);
-                if (validateIsNumber(timeBetweenShotsInMs) &&
-                    validateNumberIsNotNegative(timeBetweenShotsInMs) &&
-                    validateNumberIsIntegerValue(timeBetweenShotsInMs)) {
+        get timeBetweenShotsInMs() {
+            return this._timeBetweenShotsInMs;
+        }
 
-                    this._timeBetweenShotsInMs = timeBetweenShotsInMs;
-                }
+        set timeBetweenShotsInMs(timeBetweenShotsInMs) {
+            validateValueIsNotSet(this._timeBetweenShotsInMs);
+            if (validateIsNumber(timeBetweenShotsInMs) &&
+                validateNumberIsNotNegative(timeBetweenShotsInMs) &&
+                validateNumberIsIntegerValue(timeBetweenShotsInMs)) {
+
+                this._timeBetweenShotsInMs = timeBetweenShotsInMs;
             }
-        });
+        }
 
-        Object.defineProperty(Constructor.prototype, 'reloadTimeInMs', {
-            get: function () {
-                return this._reloadTimeInMs;
-            },
-            set: function (reloadTimeInMs) {
-                validateValueIsNotSet(this._reloadTimeInMs);
-                if (validateIsNumber(reloadTimeInMs) &&
-                    validateNumberIsNotNegative(reloadTimeInMs) &&
-                    validateNumberIsIntegerValue(reloadTimeInMs)) {
+        get reloadTimeInMs() {
+            return this._reloadTimeInMs;
+        }
 
-                    this._reloadTimeInMs = reloadTimeInMs;
-                }
+        set reloadTimeInMs(reloadTimeInMs) {
+            validateValueIsNotSet(this._reloadTimeInMs);
+            if (validateIsNumber(reloadTimeInMs) &&
+                validateNumberIsNotNegative(reloadTimeInMs) &&
+                validateNumberIsIntegerValue(reloadTimeInMs)) {
+
+                this._reloadTimeInMs = reloadTimeInMs;
             }
-        });
+        }
 
-        Object.defineProperty(Constructor.prototype, 'ammoCapacity', {
-            get: function () {
-                return this._ammoCapacity;
-            },
-            set: function (ammoCapacity) {
-                validateValueIsNotSet(this._ammoCapacity);
-                if (validateIsNumber(ammoCapacity) &&
-                    validateNumberIsNotNegative(ammoCapacity) &&
-                    validateNumberIsIntegerValue(ammoCapacity)) {
+        get ammoCapacity() {
+            return this._ammoCapacity;
+        }
 
-                    this._ammoCapacity = ammoCapacity;
-                }
+        set ammoCapacity(ammoCapacity) {
+            validateValueIsNotSet(this._ammoCapacity);
+            if (validateIsNumber(ammoCapacity) &&
+                validateNumberIsNotNegative(ammoCapacity) &&
+                validateNumberIsIntegerValue(ammoCapacity)) {
+
+                this._ammoCapacity = ammoCapacity;
             }
-        });
+        }
 
-        Constructor.prototype.addMod = function (mod) {
+        addMod(mod) {
             if (!mod) {
                 throw new Error('mod parameter must be provided.');
             }
@@ -102,46 +96,44 @@
                 this._activeEffectMods.push(mod);
             }
             this._mods[mod.name] = mod;
-        };
+        }
 
-        Constructor.prototype.shoot = function () {
+        shoot() {
             var damageToDo;
 
             return damageToDo;
-        };
-
-        function validateValueIsNotSet(property) {
-            if (property) {
-                throw new Error('Property value cannot be changed.');
-            }
         }
+    }
 
-        function validateIsNumber(value) {
-            if (+value || value === 0) {
-                return true;
-            } else {
-                throw new Error('Value must be a number.');
-            }
+    function validateValueIsNotSet(property) {
+        if (property) {
+            throw new Error('Property value cannot be changed.');
         }
+    }
 
-        function validateNumberIsNotNegative(value) {
-            if (value >= 0) {
-                return true;
-            } else {
-                throw new Error('Value must be greated than or equal to zero.');
-            }
+    function validateIsNumber(value) {
+        if (+value || value === 0) {
+            return true;
+        } else {
+            throw new Error('Value must be a number.');
         }
+    }
 
-        function validateNumberIsIntegerValue(value) {
-            if ((value | 0) === +value) {
-                return true;
-            } else {
-                throw new Error('Value must be an integer.');
-            }
+    function validateNumberIsNotNegative(value) {
+        if (value >= 0) {
+            return true;
+        } else {
+            throw new Error('Value must be greated than or equal to zero.');
         }
+    }
 
-        return Constructor;
-    } ());
+    function validateNumberIsIntegerValue(value) {
+        if ((value | 0) === +value) {
+            return true;
+        } else {
+            throw new Error('Value must be an integer.');
+        }
+    }
 
     module.exports = BaseWeapon;
-} ());
+})();

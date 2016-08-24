@@ -1,60 +1,51 @@
-(function () {
-    var ControlDefinition = (function () {
-        var _controlName,
-            _keyCode,
-            _state;
-
-        function Constructor(controlName, keyCode, state) {
+(() => {
+    class ControlDefinition {
+        constructor(controlName, keyCode, state) {
             this.controlName = controlName;
             this.keyCode = keyCode;
             this.state = state;
         }
 
-        Object.defineProperty(Constructor.prototype, 'keyCode', {
-            get: function () {
-                return _keyCode;
-            },
-            set: function (keyCode) {
-                if (!(+keyCode || keyCode === 0)) {
-                    throw new Error('keyCode parameter must be a number.');
-                }
+        get keyCode() {
+            return this._keyCode;
+        }
 
-                _keyCode = keyCode;
+        set keyCode(keyCode) {
+            if (!(+keyCode || keyCode === 0)) {
+                throw new Error('keyCode parameter must be a number.');
             }
-        });
 
-        Object.defineProperty(Constructor.prototype, 'controlName', {
-            get: function () {
-                return _controlName;
-            },
-            set: function (controlName) {
-                if (typeof controlName !== 'string') {
-                    throw new Error('controlName parameter must be a string.');
-                }
+            this._keyCode = keyCode;
+        }
 
-                if (!(3 <= controlName.length && controlName.length <= 16)) {
-                    throw new Error('controlName length must be between 3 and 16');
-                }
+        get controlName() {
+            return this_controlName;
+        }
 
-                _controlName = controlName;
+        set controlName(controlName) {
+            if (typeof controlName !== 'string') {
+                throw new Error('controlName parameter must be a string.');
             }
-        });
 
-        Object.defineProperty(Constructor.prototype, 'state', {
-            get: function () {
-                return _state;
-            },
-            set: function (state) {
-                if (typeof state !== 'boolean') {
-                    throw new Error('state parameter must be boolean.');
-                }
-
-                _state = state;
+            if (!(3 <= controlName.length && controlName.length <= 16)) {
+                throw new Error('controlName length must be between 3 and 16');
             }
-        });
 
-        return Constructor;
-    } ());
+            this._controlName = controlName;
+        }
+
+        get state() {
+            return this._state;
+        }
+
+        set state(state) {
+            if (typeof state !== 'boolean') {
+                throw new Error('state parameter must be boolean.');
+            }
+
+            this._state = state;
+        }
+    }
 
     module.exports = ControlDefinition;
-} ());
+})();

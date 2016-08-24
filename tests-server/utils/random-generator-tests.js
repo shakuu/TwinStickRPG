@@ -23,7 +23,6 @@ describe('Random', function () {
                 act;
 
             act = () => {
-                console.log(Random);
                 new Random(min, max);
             };
 
