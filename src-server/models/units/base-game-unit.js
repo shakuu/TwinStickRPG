@@ -33,6 +33,15 @@
             this._positionX = position.x;
             this._positionY = position.y;
         }
+
+        get currentWeapon() {
+            return this._currentWeapon;
+        }
+
+        set currentWeapon(weapon) {
+            validateObjectIsProvided(weapon);
+            this._currentWeapon = weapon;
+        }
     }
 
     function validatePositionvalue(value) {
@@ -46,6 +55,12 @@
 
         if ((+value | 0) !== +value) {
             throw new Error('value must be an integer.');
+        }
+    }
+
+    function validateObjectIsProvided(obj) {
+        if (!obj) {
+            throw new Error('value must be provided.');
         }
     }
 

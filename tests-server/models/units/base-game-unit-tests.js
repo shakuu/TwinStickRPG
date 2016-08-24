@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 
 describe('BaseGameUnit', () => {
     describe('constructor', () => {
-        it('Should intialize positionX and positionY to 0.', () => {
+        it('Should set positionX and positionY values to 0.', () => {
             var id = 0,
                 type = 'base unit',
                 unit = new BaseGameUnit(id, type),
@@ -11,6 +11,24 @@ describe('BaseGameUnit', () => {
 
             expect(actualPosition.x).to.equal(0);
             expect(actualPosition.y).to.equal(0);
+        });
+
+        it('Should set id value correctly.', () => {
+            var providedId = 0,
+                type = 'base unit',
+                unit = new BaseGameUnit(providedId, type),
+                actualId = unit.id;
+
+            expect(actualId).to.equal(providedId);
+        });
+
+        it('Should set type value correctly.', () => {
+            var id = 0,
+                providedType = 'base unit',
+                unit = new BaseGameUnit(id, providedType),
+                actualType = unit.type;
+
+            expect(actualType).to.equal(providedType);
         });
     });
 
@@ -180,6 +198,36 @@ describe('BaseGameUnit', () => {
             };
 
             expect(act).to.not.throw();
+        });
+    });
+
+    describe('currentWeapon', () => {
+        it('Should throw if weapon parameter is not provided.', () => {
+            var id = 0,
+                providedType = 'base unit',
+                unit = new BaseGameUnit(id, providedType),
+                weapon = null,
+                act;
+
+            act = () => {
+                unit.currentWeapon = weapon;
+            };
+
+            expect(act).to.throw(/must be provided/);
+        });
+
+        it('Should not throw if weapon parameter valid.', () => {
+            var id = 0,
+                providedType = 'base unit',
+                unit = new BaseGameUnit(id, providedType),
+                weapon = {},
+                act;
+
+            act = () => {
+                unit.currentWeapon = weapon;
+            };
+
+            expect(act).to.not.throw(/must be provided/);
         });
     });
 });
