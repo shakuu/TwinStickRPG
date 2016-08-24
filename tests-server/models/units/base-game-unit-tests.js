@@ -1,4 +1,5 @@
 var BaseGameUnit = require('../../../src-server/models/units/base-game-unit');
+var Weapon = require('../../../src-server/models/weapons/base-weapon');
 var expect = require('chai').expect;
 
 describe('BaseGameUnit', () => {
@@ -59,7 +60,7 @@ describe('BaseGameUnit', () => {
         it('Should set initial isAlive value correctly.', () => {
             var id = 0,
                 providedType = 'base unit',
-            unit = new BaseGameUnit(id, providedType);
+                unit = new BaseGameUnit(id, providedType);
 
             expect(unit.isAlive).to.equal(true);
         });
@@ -350,6 +351,20 @@ describe('BaseGameUnit', () => {
 
             expect(act).to.throw(/integer/);
         });
+
+        it('Should throw when healthPoints is a negative number.', () => {
+            var id = 0,
+                type = 'base unit',
+                unit = new BaseGameUnit(id, type),
+                healthPoints = -1234,
+                act;
+
+            act = () => {
+                unit.healthPoints = healthPoints;
+            };
+
+            expect(act).to.not.throw(/positive/);
+        });
     });
 
     describe('currentWeapon', () => {
@@ -367,11 +382,31 @@ describe('BaseGameUnit', () => {
             expect(act).to.throw(/must be provided/);
         });
 
-        it('Should not throw if weapon parameter valid.', () => {
+        it('Should throw if weapon parameter is not instanceof Weapon.', () => {
             var id = 0,
                 providedType = 'base unit',
                 unit = new BaseGameUnit(id, providedType),
                 weapon = {},
+                act;
+
+            act = () => {
+                unit.currentWeapon = weapon;
+            };
+
+            expect(act).to.throw(/type weapon/);
+        });
+
+        it('Should not throw if weapon parameter valid.', () => {
+            var id = 0,
+                providedType = 'base unit',
+                unit = new BaseGameUnit(id, providedType),
+                weaponOptions = {
+                    damage: 30,
+                    timeBetweenShotsInMs: 500,
+                    reloadTimeInMs: 5000,
+                    ammoCapacity: 10
+                },
+                weapon = new Weapon(weaponOptions),
                 act;
 
             act = () => {

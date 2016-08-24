@@ -1,4 +1,6 @@
 ((parent) => {
+    var Weapon = require('../weapons/base-weapon');
+
     class BaseGameUnit extends parent {
         constructor(id, type, healthPoints) {
             super(id, type);
@@ -71,7 +73,7 @@
         }
 
         set currentWeapon(weapon) {
-            validateObjectIsProvided(weapon);
+            validateWeaponObject(weapon);
             this._currentWeapon = weapon;
         }
 
@@ -86,6 +88,32 @@
 
         takeDamage(damage) {
             // TODO: damage modifier based on statistics
+        }
+    }
+
+    function validateWeaponObject(weapon) {
+        if (!weapon) {
+            throw new Error('weapon parameter must be provided.');
+        }
+
+        if (!(weapon instanceof Weapon)) {
+            throw new Error('weapon parameter must be of type weapon.');
+        }
+
+        if (!weapon.damage) {
+            throw new Error('weapon.damage value must be provided.');
+        }
+
+        if (!weapon.timeBetweenShotsInMs) {
+            throw new Error('weapon.timeBetweenShotsInMs value must be provided.');
+        }
+
+        if (!weapon.reloadTimeInMs) {
+            throw new Error('weapon.reloadTimeInMs value must be provided.');
+        }
+
+        if (!weapon.ammoCapacity) {
+            throw new Error('weapon.ammoCapacity value must be provided.');
         }
     }
 
@@ -110,12 +138,6 @@
 
         if ((+value | 0) !== +value) {
             throw new Error('value must be an integer.');
-        }
-    }
-
-    function validateObjectIsProvided(obj) {
-        if (!obj) {
-            throw new Error('value must be provided.');
         }
     }
 
