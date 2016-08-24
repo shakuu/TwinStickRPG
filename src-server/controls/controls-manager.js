@@ -1,8 +1,9 @@
 (function () {
     var ControlsManager = (function () {
+        var controlDefinitionsByKeyCode = [],
+            controlDefinitionsByControlName = [];
+            
         function Constructor() {
-            var controlDefinitionsByKeyCode = [],
-                controlDefinitionsByControlName = [];
         }
 
         Constructor.prototype.setKeyDown = function (keyCode) {
