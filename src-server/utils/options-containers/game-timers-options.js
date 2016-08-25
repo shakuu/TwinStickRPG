@@ -21,6 +21,15 @@
             this._nextFrameDelay = +value;
         }
 
+        get lastFrameTimestamp() {
+            return this._lastFrameTimestamp;
+        }
+
+        set lastFrameTimestamp(value) {
+            checkIfValueIsANumber(value);
+            this._lastFrameTimestamp = +value;
+        }
+
         get nextGameCycleDelay() {
             return this._nextGameCycleDelay;
         }
@@ -30,6 +39,15 @@
             this._nextGameCycleDelay = +value;
         }
 
+        get lastGameCycleTimestamp() {
+            return this._lastGameCycleTimestamp;
+        }
+
+        set lastGameCycleTimestamp(value) {
+            checkIfValueIsANumber(value);
+            this._lastGameCycleTimestamp = +value;
+        }
+
         get nextPhysicsCycleDelay() {
             return this._nextPhysicsCycleDelay;
         }
@@ -37,6 +55,15 @@
         set nextPhysicsCycleDelay(value) {
             checkIfValueIsANumber(value);
             this._nextPhysicsCycleDelay = +value;
+        }
+
+        get lastPhysicsCycleTimestamp() {
+            return this._lastPhysicsCycleTimestamp;
+        }
+
+        set lastPhysicsCycleTimestamp(value) {
+            checkIfValueIsANumber(value);
+            this._lastPhysicsCycleTimestamp = +value;
         }
     }
 
