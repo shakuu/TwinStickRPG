@@ -13,5 +13,23 @@ describe('GunKataNinja', () => {
 
             expect(ninja.currentWeapon).to.equal(providedWeapon);
         });
+
+        it('Should assign a correct value to healthPoints.', () => {
+            var id = 0,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 50),
+                providedWeapon = new Weapon(weaponOptions),
+                ninja = new GunKataNinja(0, providedWeapon);
+
+            expect(ninja.healthPoints).to.equal(1000);
+        });
+
+        it('Should assign a correct value to type.', () => {
+            var id = 0,
+                weaponOptions = new WeaponOptions(50, 100, 1000, 50),
+                providedWeapon = new Weapon(weaponOptions),
+                ninja = new GunKataNinja(0, providedWeapon);
+
+            expect(ninja.type).to.equal('GunKataNinja');
+        });
     });
 });
