@@ -40,6 +40,10 @@ describe('Validator', () => {
     });
 
     describe('validateType()', () => {
+
+    });
+
+    describe('checkIfNumberIsAnInteger()', () => {
         
     });
 });

@@ -6,7 +6,9 @@
     }
 
     function checkIfNumberIsAnInteger(value) {
-
+        if ((value | 0) !== value) {
+            throw new Error('Value must be an integer.');
+        }
     }
 
     function checkIfObjectIsOfType(obj, type) {
@@ -16,6 +18,7 @@
     }
 
     module.exports = {
+        validateInteger: checkIfNumberIsAnInteger,        
         validateNumber: checkIfNumberIsValid,
         validateType: checkIfObjectIsOfType
     };
