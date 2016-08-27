@@ -59,4 +59,74 @@ describe('BaseUserPlayer', () => {
             expect(act).to.not.throw();
         });
     });
+
+    describe('score', () => {
+        it('Should throw when score parameter is not a number.', () => {
+            let act = () => {
+                let invalidScore = 'number';
+                let playerNmae = 'name';
+                let player = new BaseUserPlayer(playerNmae);
+                player.score = invalidScore;
+            };
+
+            expect(act).to.throw(/number/);
+        });
+
+        it('Should throw when score parameter is not an integer.', () => {
+            let act = () => {
+                let invalidScore = 2.345;
+                let playerNmae = 'name';
+                let player = new BaseUserPlayer(playerNmae);
+                player.score = invalidScore;
+            };
+
+            expect(act).to.throw(/integer/);
+        });
+
+        it('Should not throw when score parameter is a valid number.', () => {
+            let act = () => {
+                let validScore = 2345;
+                let playerNmae = 'name';
+                let player = new BaseUserPlayer(playerNmae);
+                player.score = validScore;
+            };
+
+            expect(act).to.not.throw();
+        });
+    });
+
+    describe('lives', () => {
+        it('Should throw when lives parameter is not a number.', () => {
+            let act = () => {
+                let invalidLives = 'number';
+                let playerNmae = 'name';
+                let player = new BaseUserPlayer(playerNmae);
+                player.lives = invalidLives;
+            };
+
+            expect(act).to.throw(/number/);
+        });
+
+        it('Should throw when lives parameter is not an integer.', () => {
+            let act = () => {
+                let invalidLives = 2.345;
+                let playerNmae = 'name';
+                let player = new BaseUserPlayer(playerNmae);
+                player.lives = invalidLives;
+            };
+
+            expect(act).to.throw(/integer/);
+        });
+
+        it('Should not throw when lives parameter is a valid number.', () => {
+            let act = () => {
+                let validLives = 2345;
+                let playerNmae = 'name';
+                let player = new BaseUserPlayer(playerNmae);
+                player.lives = validLives;
+            };
+
+            expect(act).to.not.throw();
+        });
+    });
 });
