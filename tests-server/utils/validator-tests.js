@@ -61,7 +61,7 @@ describe('Validator', () => {
         });
     });
 
-    describe('checkIfNumberIsAnInteger()', () => {
+    describe('validateInteger()', () => {
         it('Should throw when value parameter is not provided.', () => {
             let act = () => {
                 validator.validateInteger();
@@ -86,6 +86,26 @@ describe('Validator', () => {
             };
 
             expect(act).to.not.throw(/Value must be an integer/);
+        });
+    });
+
+    describe('validateString()', () => {
+        it('Should throw when the passed value is not a string.', () => {
+            let act = () => {
+                let invalidStringToValidate = 42;
+                validator.validateString(invalidStringToValidate);
+            };
+
+            expect(act).to.throw(/must be a string/);
+        });
+
+        it('Should not throw when the passed value is a string.', () => {
+            let act = () => {
+                let validStringToValidate = 'string';
+                validator.validateString(validStringToValidate);
+            };
+
+            expect(act).to.not.throw(/must be a string/);
         });
     });
 });

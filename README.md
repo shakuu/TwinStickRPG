@@ -10,3 +10,7 @@
 1. Controls
 1. World
 3. Player
+    - unit
+    - name
+    - score
+    - lives

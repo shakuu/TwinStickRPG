@@ -17,9 +17,23 @@
         }
     }
 
+    function checkIfValueIsString(value) {
+        if (typeof value !== 'string') {
+            throw new Error('Value must be a string.');
+        }
+    }
+
+    function checkIfNumberIsWithRange(value, min, max) {
+        if (value < min || max < value) {
+            throw new Error('Value must be within the given range.');
+        }
+    }
+
     module.exports = {
-        validateInteger: checkIfNumberIsAnInteger,        
+        validateNumberIsWithinRange: checkIfNumberIsWithRange,
+        validateInteger: checkIfNumberIsAnInteger,
         validateNumber: checkIfNumberIsValid,
+        validateString: checkIfValueIsString,
         validateType: checkIfObjectIsOfType
     };
 })();
