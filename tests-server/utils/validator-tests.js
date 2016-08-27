@@ -163,4 +163,24 @@ describe('Validator', () => {
             expect(act).to.throw(/min and max/);
         });
     });
+
+    describe('validateStringOnlyContainsLetters', () => {
+        it('Should throw when the validated value contains non letter characters.', () => {
+            let act = () => {
+                let invalidValue = 'string0';
+                validator.validateStringOnlyContainsLetters(invalidValue);
+            };
+
+            expect(act).to.throw(/String must only contain letters/);
+        });
+
+        it('Should not throw when the validated value does not contain non letter characters.', () => {
+            let act = () => {
+                let validString = 'string';
+                validator.validateStringOnlyContainsLetters(validString);
+            };
+
+            expect(act).to.not.throw(/String must only contain letters/);
+        });
+    });
 });
