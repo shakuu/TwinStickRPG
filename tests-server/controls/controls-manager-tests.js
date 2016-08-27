@@ -276,7 +276,7 @@ describe('ControlManager', function () {
             expect(act).to.throw(/keyCode/);
         });
 
-        it('TEST Should throw if there is no ControlDefinition with this keyCode parameter found.', function () {
+        it('Should throw if there is no ControlDefinition with this keyCode parameter found.', function () {
             var controlsManager = new ControlsManager(),
                 keyCode = 40,
                 act;

@@ -1,5 +1,5 @@
 (() => {
-    let validatorFunctions = require('../../utils/validator');
+    let validator = require('../../utils/validator');
 
     class BaseUserPlayer {
         constructor(name) {
@@ -11,7 +11,12 @@
         }
 
         set name(name) {
+            validator.validateString(name);
+            validator.validateStringOnlyContainsLetters(name);
+
             this._name = name;
         }
     }
+
+    module.exports = BaseUserPlayer;
 })();
