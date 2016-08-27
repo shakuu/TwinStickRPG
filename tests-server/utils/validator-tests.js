@@ -108,4 +108,59 @@ describe('Validator', () => {
             expect(act).to.not.throw(/must be a string/);
         });
     });
+
+    describe('validateNumberIsWithinRange()', () => {
+        it('Should throw when the passed value is less than the provided minimum value.', () => {
+            let act = () => {
+                let invalidValue = 0;
+                let minimumValue = 1;
+                let maximumValue = 11;
+                validator.validateNumberIsWithinRange(invalidValue, minimumValue, maximumValue);
+            };
+
+            expect(act).to.throw(/Value must be within the given range/);
+        });
+
+        it('Should throw when the passed value is greater than the provided maximum value.', () => {
+            let act = () => {
+                let invalidValue = 12;
+                let minimumValue = 1;
+                let maximumValue = 11;
+                validator.validateNumberIsWithinRange(invalidValue, minimumValue, maximumValue);
+            };
+
+            expect(act).to.throw(/Value must be within the given range/);
+        });
+
+        it('Should not throw when the passed value is equal to the provided minimum value.', () => {
+            let act = () => {
+                let invalidValue = 1;
+                let minimumValue = 1;
+                let maximumValue = 11;
+                validator.validateNumberIsWithinRange(invalidValue, minimumValue, maximumValue);
+            };
+
+            expect(act).to.not.throw(/Value must be within the given range/);
+        });
+
+        it('Should not throw when the passed value is equal to the provided maximum value.', () => {
+            let act = () => {
+                let invalidValue = 11;
+                let minimumValue = 1;
+                let maximumValue = 11;
+                validator.validateNumberIsWithinRange(invalidValue, minimumValue, maximumValue);
+            };
+
+            expect(act).to.not.throw(/Value must be within the given range/);
+        });
+
+        it('Should throw when min or max values are not provided.', () => {
+            let act = () => {
+                let invalidValue = 11;
+                validator.validateNumberIsWithinRange(invalidValue);
+            };
+
+            expect(act).to.throw(/min and max/);
+        });
+    });
 });

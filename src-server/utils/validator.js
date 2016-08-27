@@ -23,16 +23,20 @@
         }
     }
 
-    function checkIfNumberIsWithRange(value, min, max) {
+    function checkIfNumberIsWithinRange(value, min, max) {
+        if(!min || !max){
+            throw new Error('min and max parameters must be provided.');
+        }
+
         if (value < min || max < value) {
             throw new Error('Value must be within the given range.');
         }
     }
 
     module.exports = {
-        validateNumberIsWithinRange: checkIfNumberIsWithRange,
         validateInteger: checkIfNumberIsAnInteger,
         validateNumber: checkIfNumberIsValid,
+        validateNumberIsWithinRange: checkIfNumberIsWithinRange,
         validateString: checkIfValueIsString,
         validateType: checkIfObjectIsOfType
     };
