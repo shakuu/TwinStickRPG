@@ -1,6 +1,7 @@
 let BaseGameUnit = require('../../../src-server/models/units/base-game-unit');
 let Weapon = require('../../../src-server/models/weapons/base-weapon');
 let WeaponOptions = require('../../../src-server/utils/options-containers/weapon-options');
+let Position = require('../../../src-server/utils/position');
 let expect = require('chai').expect;
 
 describe('BaseGameUnit', () => {
@@ -98,170 +99,10 @@ describe('BaseGameUnit', () => {
                 act;
 
             act = () => {
-                unit.position = null;
+                unit.position = { x: 100, y: 500 };
             };
 
-            expect(act).to.throw(/position/);
-        });
-
-        it('Should throw when position.x is not provided.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: null,
-                    y: 5
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/position.x/);
-        });
-
-        it('Should throw when position.x is not a number.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: 'number',
-                    y: 5
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/number/);
-        });
-
-        it('Should throw when position.x is a negative number.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: -5,
-                    y: 5
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/positive/);
-        });
-
-        it('Should throw when position.x is not an integer value.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: 5.12,
-                    y: 5
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/integer/);
-        });
-
-        it('Should throw when position.y is not provided.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: 5,
-                    y: null
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/position.y/);
-        });
-
-        it('Should throw when position.y is not a number.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: 5,
-                    y: 'number'
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/number/);
-        });
-
-        it('Should throw when position.y is a negative number.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: +5,
-                    y: -5
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/positive/);
-        });
-
-        it('Should throw when position.y is not an integer value.', () => {
-            var id = 0,
-                type = 'base unit',
-                healthPoints = 100,
-                weaponOptions = new WeaponOptions(50, 100, 1000, 100),
-                weapon = new Weapon(weaponOptions),
-                unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: 5,
-                    y: 5.45
-                },
-                act;
-
-            act = () => {
-                unit.position = position;
-            };
-
-            expect(act).to.throw(/integer/);
+            expect(act).to.throw(/type/);
         });
 
         it('Should not throw when position parameter is valid.', () => {
@@ -271,14 +112,11 @@ describe('BaseGameUnit', () => {
                 weaponOptions = new WeaponOptions(50, 100, 1000, 100),
                 weapon = new Weapon(weaponOptions),
                 unit = new BaseGameUnit(id, type, healthPoints, weapon),
-                position = {
-                    x: 1001,
-                    y: 50
-                },
                 act;
 
             act = () => {
-                unit.position = position;
+                let newPosition = new Position(1000, 1000);
+                unit.position = newPosition;
             };
 
             expect(act).to.not.throw();

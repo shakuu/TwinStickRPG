@@ -1,6 +1,9 @@
 (() => {
-    var BaseGameObject = require('../base-game-object');
-    var Weapon = require('../weapons/base-weapon');
+    let BaseGameObject = require('../base-game-object');
+    let validator = require('../../utils/validator');
+    let Weapon = require('../weapons/base-weapon');
+    let Position = require('../../utils/position');
+    let Size = require('../../utils/size');
 
     class BaseGameUnit extends BaseGameObject {
         constructor(id, type, healthPoints, weapon) {
@@ -9,37 +12,18 @@
             healthPoints = healthPoints || 100;
             this.healthPoints = healthPoints;
             this.currentWeapon = weapon;
-            this._positionX = 0;
-            this._positionY = 0;
             this.experience = 0;
             this.level = 1;
+            this._position = new Position(0, 0);
         }
 
         get position() {
-            return {
-                x: this._positionX,
-                y: this._positionY
-            };
+            return this._position;
         }
 
         set position(position) {
-            if (!position) {
-                throw new Error('position parameter must be provided.');
-            }
-
-            if (!position.x) {
-                throw new Error('position.x must be provided.');
-            }
-
-            if (!position.y) {
-                throw new Error('position.y must be provided.');
-            }
-
-            validateNumberValue(position.x);
-            validateNumberValue(position.y);
-
-            this._positionX = +position.x;
-            this._positionY = +position.y;
+            validator.validateType(position, Position);
+            this._position = position;
         }
 
         get level() {

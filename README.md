@@ -8,6 +8,13 @@
 # Game
 
 1. Controls
+2. Engine
+    - Movemenet
+    - Actions 
+        - shoot
+    - Collision
+    - Battle
+    - Spawn Enemies
 1. World
     - name
     - size X
