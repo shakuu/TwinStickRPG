@@ -25,7 +25,7 @@ describe('Validator', () => {
             };
 
             expect(actString).to.throw(/Value must be a number/);
-            expect(actNull).to.throw(/Value must be a number/);            
+            expect(actNull).to.throw(/Value must be a number/);
         });
 
         it('Should not throw when value parameter is a valid number.', () => {
@@ -187,6 +187,46 @@ describe('Validator', () => {
             };
 
             expect(act).to.not.throw(/String must only contain letters/);
+        });
+    });
+
+    describe('validateNumberIsNotNegative()', () => {
+        it('Should throw when value parameter is a negative number.', () => {
+            let act = () => {
+                let value = -100;
+                validator.validateNumberIsNotNegative(value);
+            };
+
+            expect(act).to.throw(/zero/);
+        });
+
+        it('Should not throw when value parameter is not a negative number.', () => {
+            let act = () => {
+                let value = 100;
+                validator.validateNumberIsNotNegative(value);
+            };
+
+            expect(act).to.not.throw(/zero/);
+        });
+    });
+
+    describe('validateArray()', () => {
+        it('Should throw when obj parameter is not an array.', () => {
+            let act = () => {
+                let obj = { '0': 100, 'length': 3 };
+                validator.validateArray(obj);
+            };
+
+            expect(act).to.throw(/array/);
+        });
+
+        it('Should not throw when obj parameter is an array.', () => {
+            let act = () => {
+                let obj = [100, 200];
+                validator.validateArray(obj);
+            };
+
+            expect(act).to.not.throw(/array/);
         });
     });
 });

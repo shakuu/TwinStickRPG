@@ -49,6 +49,12 @@
         }
     }
 
+    function checkIfParameterIsArray(obj) {
+        if (!Array.isArray(obj)) {
+            throw new Error('Obejct must be an array.');
+        }
+    }
+
     module.exports = {
         validateInteger: checkIfNumberIsAnInteger,
         validateNumber: checkIfNumberIsValid,
@@ -56,6 +62,7 @@
         validateNumberIsNotNegative: checkIfNumberIsNegative,
         validateString: checkIfValueIsString,
         validateStringOnlyContainsLetters: checkIfStringOnlyContainsLetters,
-        validateType: checkIfObjectIsOfType
+        validateType: checkIfObjectIsOfType,
+        validateArray: checkIfParameterIsArray
     };
 })();
