@@ -1,5 +1,9 @@
 (() => {
     function checkIfNumberIsValid(value) {
+        if (!value && value !== 0) {
+            throw new Error('Value must be a number.');
+        }
+
         if (!(+value || +value === 0)) {
             throw new Error('Value must be a number.');
         }

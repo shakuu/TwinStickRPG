@@ -9,6 +9,11 @@
 
 1. Controls
 1. World
+    - name
+    - size X
+    - size Y
+    - start location
+    - list of enemies
 3. Player
     - unit
     - name

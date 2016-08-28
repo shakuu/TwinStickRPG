@@ -14,12 +14,18 @@ describe('Validator', () => {
         });
 
         it('Should throw when value parameter is not a number.', () => {
-            let act = () => {
+            let actString = () => {
                 let value = 'zero';
                 validator.validateNumber(value);
             };
 
-            expect(act).to.throw(/Value must be a number/);
+            let actNull = () => {
+                let value = null;
+                validator.validateNumber(value);
+            };
+
+            expect(actString).to.throw(/Value must be a number/);
+            expect(actNull).to.throw(/Value must be a number/);            
         });
 
         it('Should not throw when value parameter is a valid number.', () => {
