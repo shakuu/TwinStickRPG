@@ -45,6 +45,7 @@
 
         set listOfEnemies(enemies) {
             validator.validateArray(enemies);
+            validator.validateArrayElements(enemies, 'string');
             this._listOfEnemies = enemies;
         }
     }

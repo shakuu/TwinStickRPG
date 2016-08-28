@@ -53,6 +53,18 @@
         if (!Array.isArray(obj)) {
             throw new Error('Obejct must be an array.');
         }
+
+        if (obj.length === 0) {
+            throw new Error('Array is empty.');
+        }
+    }
+
+    function checkIfAllArrayElementsAreOfType(arr, type) {
+        for (let i = 0; i < arr.length; i += 1) {
+            if (typeof arr[i] !== type) {
+                throw new Error(type);
+            }
+        }
     }
 
     module.exports = {
@@ -63,6 +75,7 @@
         validateString: checkIfValueIsString,
         validateStringOnlyContainsLetters: checkIfStringOnlyContainsLetters,
         validateType: checkIfObjectIsOfType,
-        validateArray: checkIfParameterIsArray
+        validateArray: checkIfParameterIsArray,
+        validateArrayElements: checkIfAllArrayElementsAreOfType
     };
 })();

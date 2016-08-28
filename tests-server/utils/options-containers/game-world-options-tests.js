@@ -53,7 +53,7 @@ describe('GameWorldOptions', () => {
             expect(act).to.throw(/type/);
         });
 
-        it('Should throw if enemies paramter is not an Array.', () => {
+        it('Should throw if enemies parameter is not an Array.', () => {
             let act = () => {
                 let name = 'name';
                 let size = new Size(10000, 50000);
@@ -63,6 +63,43 @@ describe('GameWorldOptions', () => {
             };
 
             expect(act).to.throw(/array/);
+        });
+
+        it('Should throw if enemies parameter is an empty Array.', () => {
+            let act = () => {
+                let name = 'name';
+                let size = new Size(10000, 50000);
+                let startPosition = new Position(5000, 5000);
+                let enemies = [];
+                new GameWorldOptions(name, size, startPosition, enemies);
+            };
+
+            expect(act).to.throw(/empty/);
+        });
+
+        it('Should throw if enemies parameter is not an array of strings.', () => {
+            let act = () => {
+                let name = 'name';
+                let size = new Size(10000, 50000);
+                let startPosition = new Position(5000, 5000);
+                let enemies = ['type', 'another type'];
+                new GameWorldOptions(name, size, startPosition, enemies);
+
+            };
+
+            expect(act).to.not.throw();
+        });
+
+        it('Should not throw if all parameters are valid.', () => {
+            let act = () => {
+                let name = 'name';
+                let size = new Size(10000, 50000);
+                let startPosition = new Position(5000, 5000);
+                let enemies = ['type', 'another type'];
+                new GameWorldOptions(name, size, startPosition, enemies);
+            };
+
+            expect(act).to.not.throw();
         });
     });
 });

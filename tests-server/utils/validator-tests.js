@@ -54,7 +54,14 @@ describe('Validator', () => {
                 validator.validateType(obj, IdProvider);
             };
 
+            let actString = () => {
+                let obj = new Random(0, 10);
+                validator.validateType('str', String);
+            };
+
+
             expect(act).to.throw(/Object is not of correct type/);
+            expect(actString).to.throw(/Object is not of correct type/);
         });
 
         it('Should not throw when obj parameter type is the same as the on provided in type parameter.', () => {
@@ -220,6 +227,15 @@ describe('Validator', () => {
             expect(act).to.throw(/array/);
         });
 
+        it('Should throw when obj parameter is an empty array.', () => {
+            let act = () => {
+                let obj = [];
+                validator.validateArray(obj);
+            };
+
+            expect(act).to.throw(/empty/);
+        });
+
         it('Should not throw when obj parameter is an array.', () => {
             let act = () => {
                 let obj = [100, 200];
@@ -227,6 +243,28 @@ describe('Validator', () => {
             };
 
             expect(act).to.not.throw(/array/);
+        });
+    });
+
+    describe('validateArrayElements', () => {
+        it('Should throw when any of the array elements do not match the provided type.', () => {
+            let expectedType = 'number';
+            let act = () => {
+                let arrayToValidate = [0, 1, NaN, 'number'];
+                validator.validateArrayElements(arrayToValidate, expectedType);
+            };
+
+            expect(act).to.throw(new RegExp(expectedType));
+        });
+
+        it('Should not throw when all array elements do match the provided type.', () => {
+            let expectedType = 'number';
+            let act = () => {
+                let arrayToValidate = [0, 1, NaN];
+                validator.validateArrayElements(arrayToValidate, expectedType);
+            };
+
+            expect(act).to.not.throw(new RegExp(expectedType));
         });
     });
 });
