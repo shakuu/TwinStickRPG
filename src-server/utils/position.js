@@ -14,6 +14,7 @@
         set x(x) {
             validator.validateNumber(x);
             validator.validateInteger(x);
+            validator.validateNumberIsNotNegative(x);
             this._x = x;
         }
 
@@ -24,6 +25,7 @@
         set y(y) {
             validator.validateNumber(y);
             validator.validateInteger(y);
+            validator.validateNumberIsNotNegative(y);
             this._y = y;
         }
     }

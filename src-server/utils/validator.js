@@ -15,6 +15,12 @@
         }
     }
 
+    function checkIfNumberIsNegative(value) {
+        if (value < 0) {
+            throw new Error('Value must be greater than or equal to zero.');
+        }
+    }
+
     function checkIfNumberIsWithinRange(value, min, max) {
         if (!min || !max) {
             throw new Error('min and max parameters must be provided.');
@@ -47,6 +53,7 @@
         validateInteger: checkIfNumberIsAnInteger,
         validateNumber: checkIfNumberIsValid,
         validateNumberIsWithinRange: checkIfNumberIsWithinRange,
+        validateNumberIsNotNegative: checkIfNumberIsNegative,
         validateString: checkIfValueIsString,
         validateStringOnlyContainsLetters: checkIfStringOnlyContainsLetters,
         validateType: checkIfObjectIsOfType
