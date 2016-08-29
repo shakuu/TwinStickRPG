@@ -1,6 +1,6 @@
 let validator = require('../../src-server/utils/validator');
-let IdProvider = require('../../src-server/utils/id-provider');
-let Random = require('../../src-server/utils/random-generator');
+let IdProvider = require('../../dist-server/utils/id-provider').IdProvider;
+let Random = require('../../dist-server/utils/random-generator').Random;
 let expect = require('chai').expect;
 
 describe('Validator', () => {

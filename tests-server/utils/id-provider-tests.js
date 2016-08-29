@@ -1,4 +1,4 @@
-var IdProvider = require('../../src-server/utils/id-provider');
+var IdProvider = require('../../dist-server/utils/id-provider').IdProvider;
 var expect = require('chai').expect;
 
 describe('IdProvider', function () {

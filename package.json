@@ -9,6 +9,7 @@
     "babel-preset-es2015": "^6.13.2"
   },
   "scripts": {
+    "tsc:w": "tsc -w",
     "servertests": "./node_modules/.bin/mocha tests-server --recursive --reporter spec",
     "clienttests": "./node_modules/.bin/mocha tests-client --recursive --reporter spec --compilers js:babel-core/register",
     "build": "babel src-browser -d src-browser-compiled"
