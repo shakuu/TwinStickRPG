@@ -2,7 +2,7 @@
   "name": "twin-stick-rpg",
   "version": "0.0.1",
   "description": "JavaScript game",
-  "main": "./scripts/app.js",
+  "main": "./dist-server/app.js",
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.11.4",

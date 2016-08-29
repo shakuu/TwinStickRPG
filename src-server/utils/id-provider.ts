@@ -1,16 +1,16 @@
-class IdProvider {
-    private _currentValue: number;
+let _currentValue: number;
 
+class IdProvider {
     constructor() {
-        this._currentValue = 0;
+        _currentValue = 0;
     }
 
     public getNext(): number {
-        return this._currentValue++;
+        return _currentValue++;
     }
 
     public reset(): void {
-        this._currentValue = 0;
+        _currentValue = 0;
     }
 }
 
