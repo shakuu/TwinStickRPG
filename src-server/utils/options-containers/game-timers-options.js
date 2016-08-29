@@ -1,5 +1,5 @@
 (() => {
-    let MILISECONDS_IN_ONE_SECOND = 1000;
+    const MILISECONDS_IN_ONE_SECOND = 1000;
 
     class GameTimersOptions {
         constructor(framesPerSecond, gameCyclesPerSecond, physicsCyclesPerSecond) {
